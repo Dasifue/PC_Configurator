@@ -21,7 +21,7 @@ class RAMtype(models.Model):
 
     class Meta:
         verbose_name = "RAM type"
-        verbose_name = "RAM types"
+        verbose_name_plural = "RAM types"
 
     def __str__(self):
         return self.name
@@ -32,7 +32,7 @@ class Chipset(models.Model):
 
     class Meta:
         verbose_name = "Chipset"
-        verbose_name = "Chipsets"
+        verbose_name_plural = "Chipsets"
     
     def __str__(self):
         return self.name
@@ -54,9 +54,13 @@ class CPU(models.Model):
 
     class Meta:
         verbose_name = "CPU"
-        verbose_name = "CPU's"
+        verbose_name_plural = "CPU's"
 
     def __str__(self):
+        return f"{self.manufacturer} {self.mark} - {self.generation}"
+    
+    @property
+    def name(self):
         return f"{self.manufacturer} {self.mark} - {self.generation}"
     
     def is_visible(self):
@@ -119,3 +123,13 @@ class Motherboard(models.Model):
         return self.socket is not None
   
 
+class MotherboardImages(models.Model):
+    motherboard = models.ForeignKey(Motherboard, on_delete=models.CASCADE, related_name="images", verbose_name="Motherboard")
+    image = models.ImageField("Image", upload_to="motherboard/", null=False, blank=False)
+    
+    class Meta:
+        verbose_name = "Motherboard image"
+        verbose_name_plural = "Motherboard images"
+
+    def __str__(self):
+        return self.motherboard.name
