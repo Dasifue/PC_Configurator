@@ -133,3 +133,20 @@ class MotherboardImages(models.Model):
 
     def __str__(self):
         return self.motherboard.name
+    
+
+class Configuration(models.Model):
+    name = models.CharField("Name", max_length=100, default="My Configuration")
+    user = models.ForeignKey("account.User", on_delete=models.CASCADE, related_name="configurations", verbose_name="Owner")
+    motherboard = models.ForeignKey(Motherboard, on_delete=models.SET_NULL, null=True, blank=True, related_name="configurations", verbose_name="Motherboard")
+    cpu = models.ForeignKey(CPU, on_delete=models.SET_NULL, null=True, blank=True, related_name="configurations", verbose_name="CPU")
+    main = models.BooleanField("Is main", default=False)
+
+    class Meta:
+        verbose_name = "Configuration"
+        verbose_name_plural = "Configurations"
+
+    def __str__(self):
+        if self.motherboard is not None:
+            return f"{self.user.username}, {self.motherboard}"
+        return f"{self.user.username}"

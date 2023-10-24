@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div id="features-wrapper">
+    <div class="container">
+        <div class="row">
+            {% for motherboard in motherboards %}
+            <div class="col-4 col-12-medium">
+                <!-- Box -->
+                    <section class="box feature">
+                        <div id="carouselExample" class="carousel slide">
+                            <div class="carousel-inner">
+                            {% for image in motherboard.images.all %}
+                              <div class="carousel-item active">
+                                <img src="{{image.image.url}}" class="d-block w-100" alt="...">
+                              </div>
+                            {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                              <span class="visually-hidden">Next</span>
+                            </button>
+                          </div>
+                        <div class="inner">
+                            <header>
+                                <h2>{{motherboard}}</h2>
+                                <p>Maybe here as well I think</p>
+                            </header>
+                            <p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
+                            <div class="col-12-medium">   
+                                <a href="#" class="button alt icon solid fa-question-circle">More info</a>
+                                <a href="{% url 'main:configuration_motherboard' pk=motherboard.pk %}" class="button icon solid">Add to configuration</a>
+                          </div>
+                        </div>
+                    </section>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+<style>
+  .button{
+    margin-bottom: 10px;
+  }
+</style>
+{% endblock %}

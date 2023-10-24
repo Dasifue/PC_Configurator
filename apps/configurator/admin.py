@@ -10,6 +10,7 @@ from .models import (
     Chipset,
     Motherboard,
     MotherboardImages,
+    Configuration
 )
 
 class RAMimagesInstanceInline(admin.TabularInline):
@@ -67,3 +68,10 @@ class ChipsetAdmin(admin.ModelAdmin):
 @admin.register(RAMtype)
 class RAMtypeAdmin(admin.ModelAdmin):
     search_fields = ("name", )
+
+
+@admin.register(Configuration)
+class ConfigurationAdmin(admin.ModelAdmin):
+    list_display = ("name", "user", "main")
+    list_display_links = ("name", )
+    list_filter = ("user", )

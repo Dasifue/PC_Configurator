@@ -6,3 +6,5 @@ media/account/
 media/cpu/
 media/motherboard/
 media/ram/
+
+db.sqlite3
