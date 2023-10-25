@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div id="main-wrapper">
+    <div class="container">
+        <div class="row gtr-200">
+
+            <form action="{% url 'account:register' %}" method="post">
+                {% csrf_token %}
+
+                {{form.as_p}}
+
+                <button type="submit">Register</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

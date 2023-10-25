@@ -29,8 +29,7 @@
 
 						<!-- Logo -->
 							<div id="logo">
-								<h1><a href="{% url 'main:main' %}">Verti</a></h1>
-								<span>by HTML5 UP</span>
+								<h1><a href="{% url 'main:main' %}">PC/CONF</a></h1>
 							</div>
 
 						<!-- Nav -->
@@ -60,8 +59,8 @@
 									<li>
 										<a href="#">{{request.user.username}}</a>
 										<ul>
-											<li><a href="#">Profile</a></li>
-											<li><a href="#">Logout</a></li>
+											<li><a href="{% url 'account:profile' pk=request.user.pk %}">Profile</a></li>
+											<li><a href="{% url 'account:logout' %}">Logout</a></li>
 										</ul>
 									</li>
 									{% endif %}
@@ -69,8 +68,8 @@
 									<li>
 										<a href="#">Account</a>
 										<ul>
-											<li><a href="#">Register</a></li>
-											<li><a href="#">Login</a></li>
+											<li><a href="{% url 'account:register' %}">Register</a></li>
+											<li><a href="{% url 'account:login' %}">Login</a></li>
 										</ul>
 									</li>
 								</ul>

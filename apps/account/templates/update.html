@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div id="main-wrapper">
+    <div class="container">
+        <div class="row gtr-200">
+
+            <form action="{% url 'account:update' %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <img src="{{ user.image.url }}" alt="avatar" width="200px" height="200px">
+
+                {{form.as_p}}
+
+                <button type="submit">update</button>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
