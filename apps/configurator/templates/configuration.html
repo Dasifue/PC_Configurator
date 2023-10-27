@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<div id="features-wrapper">
+    <div class="container">
+        <div class="row">
+
+            <form action="{% url 'main:configuration_details' pk=configuration.pk %}" method="post">
+                {% csrf_token %}
+                {{ form.name.errors }}
+                {{ form.name.label }}
+                {{ form.name  }}
+
+                <input type="checkbox" name="main" value="True" {% if configuration.main %}checked{% endif %}>
+                <label for="vehicle1"> Main</label><br>
+
+
+
+                <button type="submit">Save</button>
+            </form>
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">
+                            {{ message|safe }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            {% if configuration.motherboard %}
+            <div class="col-4 col-12-medium">
+                <section class="box feature">
+                    <div id="carouselExample" class="carousel slide">
+                        <div class="carousel-inner">
+                        {% for image in configuration.motherboard.images.all %}
+                            <div class="carousel-item active">
+                            <img src="{{image.image.url}}" class="d-block w-100" alt="...">
+                            </div>
+                        {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        </div>
+                    <div class="inner">
+                        <header>
+                            <h2>{{configuration.motherboard}}</h2>
+                            <p>Maybe here as well I think</p>
+                        </header>
+                        <p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
+                        <div class="col-12-medium">   
+                            <a href="#" class="button alt icon solid fa-question-circle">More info</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            {% endif %}
+
+            {% if configuration.cpu %}
+            <div class="col-4 col-12-medium">
+                <section class="box feature">
+                    <div id="carouselExample" class="carousel slide">
+                        <div class="carousel-inner">
+                        {% for image in configuration.cpu.images.all %}
+                            <div class="carousel-item active">
+                            <img src="{{image.image.url}}" class="d-block w-100" alt="...">
+                            </div>
+                        {% endfor %}
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                        </div>
+                    <div class="inner">
+                        <header>
+                            <h2>{{configuration.cpu}}</h2>
+                            <p>Maybe here as well I think</p>
+                        </header>
+                        <p>Phasellus quam turpis, feugiat sit amet in, hendrerit in lectus. Praesent sed semper amet bibendum tristique fringilla.</p>
+                        <div class="col-12-medium">   
+                            <a href="#" class="button alt icon solid fa-question-circle">More info</a>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -29,7 +29,7 @@
                         <header>
                             <h2>{{configuration.name}}</h2>
                         </header>
-                        <a href="#" class="button alt large icon solid fa-question-circle">More info</a>
+                        <a href="{% url 'main:configuration_details' pk=configuration.pk %}" class="button alt large icon solid fa-question-circle">More info</a>
                     </div>
                 </section>
             </div>

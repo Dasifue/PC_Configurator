@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, mixins
 from django.contrib import messages
 from django.urls import reverse_lazy, reverse
 from django.views import generic, View
@@ -43,7 +43,7 @@ class LoginView(generic.FormView):
         return render(request=request, template_name=self.template_name, context={ "form":form })
     
 
-class LogoutView(View):
+class LogoutView(mixins.LoginRequiredMixin, View):
     success_url = reverse_lazy("account:login")
 
     def get(self, request):
@@ -51,7 +51,7 @@ class LogoutView(View):
         return redirect(self.success_url)
 
 
-class UserDetailsView(generic.DetailView):
+class UserDetailsView(mixins.LoginRequiredMixin, generic.DetailView):
     model = User
     template_name = "profile.html"
     pk_url_kwarg = "pk"
@@ -63,7 +63,7 @@ class UserDetailsView(generic.DetailView):
         return context
     
 
-class UpdateProfileView(generic.UpdateView):
+class UpdateProfileView(mixins.LoginRequiredMixin, generic.UpdateView):
     model = User
     form_class = UserUpdateForm
     template_name = "update.html"
@@ -82,7 +82,7 @@ class UpdateProfileView(generic.UpdateView):
         return render(request=request, template_name=self.template_name, context={ "form":form })
     
 
-class ChangePasswordView(generic.FormView):
+class ChangePasswordView(mixins.LoginRequiredMixin, generic.FormView):
     form_class = PasswordChangeForm
     template_name = "change_password.html"
 
