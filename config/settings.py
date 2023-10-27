@@ -11,17 +11,18 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-from django.urls import reverse
-
+from dotenv import load_dotenv
+from os import getenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-m6uic1)@2$ji1t+ow0@2+75%%@k2vtl(r2j(q*(e#8qfuu^%pe'
+SECRET_KEY = getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -76,11 +77,24 @@ WSGI_APPLICATION = 'config.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+
+        'NAME': getenv("DATABASE_NAME"),
+
+        'USER': getenv("DATABASE_USER"),
+
+        'PASSWORD': getenv("DATABASE_PASSWORD"),
+
+        'HOST': getenv("DATABASE_HOST"),
+
+        'PORT': getenv("DATABASE_PORT"),
+
     }
+
 }
 
 
